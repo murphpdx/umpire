@@ -170,8 +170,12 @@ function App() {
             </div>
         </div>
         <div className="AppButtons">
-            <Button variant="contained" className="AppButtonsOne" onClick={runnerScored}>Runner scored</Button>
-            <Button variant="contained" className="AppButtonsOne" onClick={newBatter}>Runner safe</Button>
+            <div className="AppButtonsOne">
+                <Button variant="contained" onClick={runnerScored}>Runner scored</Button>
+            </div>
+            <div className="AppButtonsOne">
+                <Button variant="contained" onClick={newBatter}>Runner safe</Button>
+            </div>
         </div>
         <div className="AppCounts">
             <div className="AppCountsOuts" onClick={incrementOuts}>
