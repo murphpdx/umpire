@@ -9,8 +9,12 @@
   font-size: calc(10px + 2vmin);
   color: white;
 
-  &Header {
+  &Warnings {
+    height: 30px;
+    font-size: medium;
+  }
 
+  &Header {
     &InningControls {
       float: right;
       font-size: xx-small;

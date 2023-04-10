@@ -12,6 +12,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
+import WarningIcon from '@mui/icons-material/Warning';
 
 function App() {
   const maxBalls = 4;
@@ -27,12 +28,16 @@ function App() {
   const [awayScore, setAwayScore] = React.useState(0)
   const [strikes, setStrikes] = React.useState(0)
   const [baseStatus, setBaseStatus] = React.useState(emptyBases)
+  const [mercyRule, setMercyRule] = React.useState(false)
+  const [slaughterRule, setSlaughterRule] = React.useState(false)
+  const [pointsPerInning, setPointsPerInning] = React.useState(0)
 
   const incrementOuts = () => {
     resetBatterStats()
     if (outs === maxOuts - 1) {
       setOuts(0)
       setHalfInnings(halfInning+1)
+      setPointsPerInning(0)
       return;
     }
     setOuts(outs + 1)
@@ -129,17 +134,32 @@ function App() {
     }
   }
 
+  const checkRules = () => {
+    const diff = homeScore - awayScore;
+    if (diff >= 11 || diff <= -11) {
+      setSlaughterRule(true)
+    }
+    if (pointsPerInning === 7) {
+      setMercyRule(true)
+    }
+  }
+
   const incrementScore = () => {
+    setPointsPerInning(pointsPerInning+1)
     const team = halfInning % 2;
     if (team) {
       setHomeScore(homeScore+1)
+      checkRules()
       return
     }
     setAwayScore(awayScore+1);
+    checkRules()
   }
 
   const incrementAwayScore = () => {
+    setPointsPerInning(pointsPerInning + 1)
     setAwayScore(awayScore+1)
+    checkRules()
   }
   const decrementAwayScore = () => {
     if (awayScore === 0) {
@@ -158,7 +178,9 @@ function App() {
   }
 
   const incrementHomeScore = () => {
+    setPointsPerInning(pointsPerInning + 1)
     setHomeScore(homeScore+1)
+    checkRules()
   }
 
   const decrementHomeScore = () => {
@@ -192,6 +214,9 @@ function App() {
 
   const incrementInning = () => {
     setHalfInnings(halfInning + 1)
+    setPointsPerInning(0)
+    setMercyRule(false)
+    setSlaughterRule(false)
   }
 
   const decrementInning = () => {
@@ -199,10 +224,19 @@ function App() {
       return
     }
     setHalfInnings(halfInning - 1)
+    setPointsPerInning(pointsPerInning+1)
   }
 
   return (
     <div className="App">
+      <div className="AppWarnings">
+        <div className="AppWarningsMercy" style={{ display: mercyRule ? "block" : "none" }}>
+          <WarningIcon fontSize="small" /> Mercy rule applies.
+        </div>
+        <div className="AppWarningsSlaughter" style={{ display: slaughterRule ? "block" : "none" }}>
+          <WarningIcon fontSize="small" /> Slaughter rule applies, if teams agree.
+        </div>
+      </div>
       <div className="AppHeader">
         <div className="AppHeaderTitle">
           { renderInnings() }
@@ -213,13 +247,13 @@ function App() {
           <KeyboardArrowDownIcon onClick={decrementInning} />
         </div>
       </div>
-        <div className="AppScoresHeaders">
-          <div className="AppScoresHeadersEach">
-           Home
-          </div>
-          <div className="AppScoresHeadersEach">
-            Away
-          </div>
+      <div className="AppScoresHeaders">
+        <div className="AppScoresHeadersEach">
+         Home
+        </div>
+        <div className="AppScoresHeadersEach">
+          Away
+        </div>
         </div>
         <div className="AppScores">
           <div className="AppScoresHome">
