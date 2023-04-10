@@ -10,41 +10,72 @@
   color: white;
 
   &Header {
-    font-size: xx-large;
+
+    &InningControls {
+      float: right;
+      font-size: xx-small;
+      margin-left: 12px;
+    }
+
+    &Title {
+      font-size: xx-large;
+      float: left;
+    }
   }
 
   &Counts {
     text-align: left;
     padding: 8px;
-   }
+    display: table;
+
+    &LabelColumn {
+      margin-right: 16px;
+      display: table-column;
+      float: left;
+      line-height: 38px;
+    }
+
+    &CountColumn {
+      display: table-column;
+      float: right;
+    }
+  }
 
   &Scores {
-    padding: 8px;
+    padding-left: 44px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    display: table;
+
     &Home {
       font-size: xxx-large;
       width: 60px;
       float: left;
-      background: blue;
+      background: rgba(16, 16, 187, 0.84);
+      display: table-column;
+
       &Update {
         float: left;
+        display: table-column;
       }
     }
     &Away {
       font-size: xxx-large;
       width: 60px;
-      float: right;
-      background: red;
+      float: left;
+      background: #810000;
+      display: table-column;
+
       &Update {
-        float: right;
+        display: table-column;
+        float: left;
       }
     }
     &Headers {
       font-size: large;
       font-weight: bold;
       &Each {
-        margin: 4px;
-        margin-right: 8px;
-        margin-left: 28px;
+        margin: 4px 8px 0 28px;
         float: left;
       }
     }
@@ -60,8 +91,13 @@
     margin: 24px;
     display: table;
     transform: rotate(45deg);
-    border: 1px white;
-    border-style: solid;
+    border: 1px solid white;
+
+    &Icon {
+      -webkit-transform: scaleX(-1) rotate(45deg);
+      transform: scaleX(-1) rotate(45deg);
+    }
+
     &Row {
       display: table-row;
       width: auto;
@@ -70,26 +106,26 @@
     &First {
       width: 40px;
       height: 40px;
-      background: white;
       float: left; /* fix for  buggy browsers */
       display: table-column;
       margin: 1px;
+      background: white;
     }
     &Second {
       width: 40px;
       height: 40px;
-      background: white;
       float: left; /* fix for  buggy browsers */
       display: table-column;
       margin: 1px;
+      background: white;
     }
     &Third {
       width: 40px;
       height: 40px;
-      background: white;
       float: left; /* fix for  buggy browsers */
       display: table-column;
       margin: 1px;
+      background: white;
     }
     &Home {
       width: 40px;
@@ -97,6 +133,7 @@
       float: left; /* fix for  buggy browsers */
       display: table-column;
       margin: 1px;
+      background: #282c34;
 
     }
   }
