@@ -13,6 +13,8 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import WarningIcon from '@mui/icons-material/Warning';
+import {getNumberSuffix, renderIcons} from "./utils";
+import {Stopwatch} from "./stopwatch";
 
 function App() {
   const maxBalls = 4;
@@ -46,49 +48,19 @@ function App() {
   const renderInnings = (): string => {
     const inningSide = halfInning % 2 ? 'Bottom' : 'Top';
     let inningNumber = Math.floor(halfInning/2) + 1
-    let inning: string = '';
 
-    switch (inningNumber) {
-      case 1:
-        inning = `${inningNumber}st`
-        break;
-      case 2:
-        inning = `${inningNumber}nd`
-        break;
-      case 3:
-        inning = `${inningNumber}rd`
-        break;
-      default:
-        inning = `${inningNumber}th`
-        break;
-    }
-
-    return `${inningSide} of the ${inning}`
+    return `${inningSide} of the ${getNumberSuffix(inningNumber)}`
   }
 
   const renderedOuts = (): ReactNode => {
     return renderIcons(<DoNotDisturbOffTwoToneIcon fontSize="large" />, <HideSourceIcon fontSize="large" />, outs, maxOuts);
   }
-
-  const renderIcons = (filledNode: ReactNode, outlinedNode: ReactNode, count: number, total: number): ReactNode => {
-    const nodes = [];
-    for (let i = 0; i < count; i++) {
-      nodes.push(filledNode)
-    }
-    for (let i = count; i < total; i++) {
-      nodes.push(outlinedNode)
-    }
-    return nodes;
-  }
-
   const renderBalls = (): ReactNode => {
     return renderIcons(<SportsBaseballIcon fontSize="large" />, <SportsBaseballTwoToneIcon fontSize="large" />, ballCount, maxBalls);
   }
-
   const renderFouls = (): ReactNode => {
     return renderIcons(<OutboundIcon fontSize="large" />, <OutboundOutlinedIcon fontSize="large" />, fouls, maxFouls);
   }
-
   const renderStrikes = (): ReactNode => {
     return renderIcons(<CancelIcon fontSize="large" />, <HighlightOffIcon fontSize="large" />, strikes, maxStrikes);
   }
@@ -207,7 +179,6 @@ function App() {
       if (i === 2) {
         incrementScore()
         resetBatterStats();
-        setBaseStatus(emptyBases)
       }
     }
   }
@@ -329,6 +300,7 @@ function App() {
             <div className="AppBasesHome"></div>
           </div>
         </div>
+      <Stopwatch/>
     </div>
   );
 }
