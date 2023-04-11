@@ -40,6 +40,7 @@ function App() {
       setOuts(0)
       setHalfInnings(halfInning+1)
       setPointsPerInning(0)
+      setBaseStatus(emptyBases)
       return;
     }
     setOuts(outs + 1)
@@ -67,6 +68,7 @@ function App() {
 
   const runnerSafe = () => {
     addRunner()
+    resetBatterStats()
   }
 
   const resetBatterStats = () => {
