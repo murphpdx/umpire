@@ -35,6 +35,7 @@ function App() {
   const [mercyRule, setMercyRule] = React.useState(false)
   const [slaughterRule, setSlaughterRule] = React.useState(false)
   const [pointsPerInning, setPointsPerInning] = React.useState(0)
+  const [twoBaseWalk, setTwoBaseWalk] = React.useState(false)
 
   const incrementOuts = () => {
     resetBatterStats()
@@ -69,6 +70,7 @@ function App() {
   }
 
   const runnerSafe = () => {
+    setTwoBaseWalk(false);
     addRunner()
     resetBatterStats()
   }
@@ -80,15 +82,21 @@ function App() {
   }
 
   const incrementBalls = () => {
-    if (ballCount === maxBalls-1) {
+    const fourBalls = ballCount === maxBalls-1;
+    if (fourBalls && strikes === 0 && fouls === 0) {
+      setTwoBaseWalk(true);
+    }
+    if (fourBalls) {
       addRunner()
       resetBatterStats();
       return
     }
+    setTwoBaseWalk(false);
     setBallCount(ballCount+1)
   }
 
   const incrementFouls = () => {
+    setTwoBaseWalk(false);
     if (fouls === maxFouls-1) {
       resetBatterStats()
       incrementOuts()
@@ -98,6 +106,7 @@ function App() {
   }
 
   const runnerScoredButton = () => {
+    setTwoBaseWalk(false);
     const newBaseStatus = structuredClone(baseStatus);
     incrementScore();
 
@@ -145,6 +154,7 @@ function App() {
   }
 
   const incrementStrikes = () => {
+    setTwoBaseWalk(false);
     if (strikes === maxStrikes - 1) {
       setStrikes(0)
       incrementOuts()
@@ -188,6 +198,7 @@ function App() {
   }
 
   const incrementInning = () => {
+    setTwoBaseWalk(false);
     setHalfInnings(halfInning + 1)
     setPointsPerInning(0)
     setMercyRule(false)
@@ -282,6 +293,9 @@ function App() {
               </div>
             </div>
         </div>
+      <div className="AppWalkRule" style={{ display: twoBaseWalk ? "block" : "none" }}>
+        <WarningIcon fontSize="small" /> Runner advances 2 bases.
+      </div>
 
         <div className="AppBases">
           <div className="AppBasesRow">

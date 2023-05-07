@@ -9,9 +9,13 @@
   font-size: calc(10px + 2vmin);
   color: white;
 
+  &WalkRule {
+    height: 30px;
+  }
+
   &Warnings {
     margin-top: 12px;
-    height: 30px;
+    min-height: 30px;
     font-size: medium;
   }
 
