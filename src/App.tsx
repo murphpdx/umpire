@@ -233,7 +233,6 @@ function App() {
           <KeyboardArrowDownIcon onClick={decrementInning} />
         </div>
       </div>
-      <Link target="_blank" rel="noreferrer" href='https://drive.google.com/file/d/1VlmjBTDGWwitaDkQAHJQ7R26vJFzfX98/view?usp=drivesdk'> Rules </Link>
       <div className="AppScoresHeaders">
         <div className="AppScoresHeadersEach">
          Home
@@ -320,6 +319,7 @@ function App() {
           </div>
         </div>
       <Stopwatch/>
+      <Link target="_blank" rel="noreferrer" href='https://drive.google.com/file/d/1VlmjBTDGWwitaDkQAHJQ7R26vJFzfX98/view?usp=drivesdk'> Rules </Link>
     </div>
   );
 }
