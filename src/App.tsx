@@ -39,6 +39,7 @@ function App() {
 
   const incrementOuts = () => {
     resetBatterStats()
+    setTwoBaseWalk(false);
     if (outs === maxOuts - 1) {
       setOuts(0)
       setHalfInnings(halfInning+1)
@@ -198,6 +199,7 @@ function App() {
   }
 
   const incrementInning = () => {
+    setTwoBaseWalk(false);
     setTwoBaseWalk(false);
     setHalfInnings(halfInning + 1)
     setPointsPerInning(0)
