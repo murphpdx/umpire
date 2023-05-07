@@ -15,6 +15,8 @@ import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import WarningIcon from '@mui/icons-material/Warning';
 import {getNumberSuffix, renderIcons} from "./utils";
 import {Stopwatch} from "./stopwatch";
+import {Link} from "@mui/material";
+import './assets/digital-7-font/Digital7Mono-Yz9J4.ttf';
 
 function App() {
   const maxBalls = 4;
@@ -203,7 +205,7 @@ function App() {
   return (
     <div className="App">
       <div className="AppWarnings">
-        <div className="AppWarningsMercy" style={{ display: mercyRule ? "block" : "none" }}>
+        <div className="AppWarningsMercy" style={{ display: mercyRule && !slaughterRule ? "block" : "none" }}>
           <WarningIcon fontSize="small" /> Mercy rule applies.
         </div>
         <div className="AppWarningsSlaughter" style={{ display: slaughterRule ? "block" : "none" }}>
@@ -220,6 +222,7 @@ function App() {
           <KeyboardArrowDownIcon onClick={decrementInning} />
         </div>
       </div>
+      <Link target="_blank" rel="noreferrer" href='https://drive.google.com/file/d/1VlmjBTDGWwitaDkQAHJQ7R26vJFzfX98/view?usp=drivesdk'> Rules </Link>
       <div className="AppScoresHeaders">
         <div className="AppScoresHeadersEach">
          Home
