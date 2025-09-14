@@ -321,7 +321,7 @@ function App() {
           </div>
         </div>
       <Stopwatch/>
-      <Link target="_blank" rel="noreferrer" href='https://drive.google.com/file/d/1VlmjBTDGWwitaDkQAHJQ7R26vJFzfX98/view?usp=drivesdk'> Rules </Link>
+      <Link target="_blank" rel="noreferrer" href='https://drive.google.com/file/d/13cCdhrVsXfyGfDzScRkq0v-MnTx9Ixt1/view?usp=drivesdk'> Rules </Link>
     </div>
   );
 }
