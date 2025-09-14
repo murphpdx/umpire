@@ -111,7 +111,7 @@ function App() {
 
   const incrementFouls = () => {
     setTwoBaseWalk(false);
-    if (fouls === maxFouls-1) {
+    if (fouls === maxFouls-1 || strikes === 2) {
       resetBatterStats()
       incrementOuts()
       return
