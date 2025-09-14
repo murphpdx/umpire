@@ -13,7 +13,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import WarningIcon from '@mui/icons-material/Warning';
-import {getNumberSuffix, renderIcons} from "./utils";
+import {getNumberSuffix, renderIcons, walkTwoBases} from "./utils";
 import {Stopwatch} from "./stopwatch";
 import {Link} from "@mui/material";
 import './assets/digital-7-font/Digital7Mono-Yz9J4.ttf';
@@ -82,18 +82,31 @@ function App() {
     setStrikes(0)
   }
 
+  const _walkTwoBases = () => {
+    const result = walkTwoBases(baseStatus);
+    setBaseStatus(result.newBases);
+    console.log(`Score: ${result.runsScored}`)
+    if (result.runsScored > 0) {
+      incrementScore(result.runsScored);
+    }
+  }
+
   const incrementBalls = () => {
     const fourBalls = ballCount === maxBalls-1;
     if (fourBalls && strikes === 0 && fouls === 0) {
       setTwoBaseWalk(true);
-    }
-    if (fourBalls) {
-      addRunner()
+      _walkTwoBases();
       resetBatterStats();
-      return
+      return;
+    }
+
+    if (fourBalls) {
+      addRunner();
+      resetBatterStats();
+      return;
     }
     setTwoBaseWalk(false);
-    setBallCount(ballCount+1)
+    setBallCount(ballCount+1);
   }
 
   const incrementFouls = () => {
@@ -130,15 +143,17 @@ function App() {
     }
   }
 
-  const incrementScore = () => {
-    setPointsPerInning(pointsPerInning+1)
+  const incrementScore = (incrementBy?: number) => {
+    const _incrementBy = incrementBy === undefined ? 1 : incrementBy;
+    setPointsPerInning(pointsPerInning+_incrementBy)
     const team = halfInning % 2;
+    console.log(`in increment score ${team ? homeScore : awayScore}`)
     if (team) {
-      setHomeScore(homeScore+1)
+      setHomeScore(homeScore+_incrementBy)
       checkRules()
       return
     }
-    setAwayScore(awayScore+1);
+    setAwayScore(awayScore+_incrementBy);
     checkRules()
   }
 
@@ -185,6 +200,7 @@ function App() {
 
   const addRunner = () => {
     const newBaseStatus = structuredClone(baseStatus);
+
     for (let i = 0; i < 3; ++i) {
       if (!baseStatus[i]) {
         newBaseStatus[i] = true;

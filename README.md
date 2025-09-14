@@ -55,3 +55,16 @@ The bases display will be automatically updated based on walks and runners safe.
 
 The game clock is displayed at the bottom of the screen. The clock will start when the play button is clicked, the play button will then flip to be a pause button. It can be cleared by clicking the x button.
 
+### Walked two bases 
+
+
+| first | second | third | -> | first | second | third | score incremented by |
+|-------|--------|-------|----|-------|--------|-------|---------------------|
+|   0   |    0   |   0   | -> |   0   |    1   |   0   | 0                   |
+|   1   |    0   |   0   | -> |   0   |    1   |   1   | 0                   |
+|   0   |    1   |   0   | -> |   0   |    1   |   1   | 0                   |
+|   0   |    0   |   1   | -> |   0   |    1   |   1   | 0                   |
+|   1   |    1   |   0   | -> |   0   |    1   |   1   | 1                   |
+|   1   |    0   |   1   | -> |   0   |    1   |   1   | 1                   |
+|   0   |    1   |   1   | -> |   0   |    1   |   1   | 1                   |
+|   1   |    1   |   1   | -> |   0   |    1   |   1   | 2                   |
